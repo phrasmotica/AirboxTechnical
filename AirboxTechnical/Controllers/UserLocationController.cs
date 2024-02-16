@@ -44,14 +44,10 @@ namespace AirboxTechnical.Controllers
             var user = await _userService.GetUser(userId);
             if (user is null)
             {
-                _logger.LogError($"Creating user with name {location.User.Name}");
+                _logger.LogError($"User {userId} does not exist!");
 
-                var newUser = await _userService.AddUser(new()
-                {
-                    Name = location.User.Name,
-                });
-
-                location.User.Id = newUser.Id;
+                // TODO: figure out a better status code for this
+                return StatusCode(503);
             }
 
             _logger.LogInformation($"Adding location for user {userId}");
