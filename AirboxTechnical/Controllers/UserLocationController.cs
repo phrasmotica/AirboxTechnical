@@ -1,6 +1,7 @@
 using AirboxTechnical.Data.Models;
 using AirboxTechnical.Data.Services;
 using AirboxTechnical.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirboxTechnical.Controllers
@@ -11,22 +12,32 @@ namespace AirboxTechnical.Controllers
     {
         private readonly IUserService _userService;
         private readonly IUserLocationService _userLocationService;
+        private readonly IValidator<CreateUserLocationRequest> _createRequestValidator;
         private readonly ILogger<UserLocationController> _logger;
 
         public UserLocationController(
             IUserService userService,
             IUserLocationService userLocationService,
+            IValidator<CreateUserLocationRequest> createRequestValidator,
             ILogger<UserLocationController> logger)
         {
             _userService = userService;
             _userLocationService = userLocationService;
+            _createRequestValidator = createRequestValidator;
             _logger = logger;
         }
 
         [HttpPost(Name = "AddLocation")]
         public async Task<ActionResult<UserLocation>> AddLocation(CreateUserLocationRequest location)
         {
-            // TODO: validate CreateUserLocationRequest model
+            var validation = _createRequestValidator.Validate(location);
+            if (!validation.IsValid)
+            {
+                var errors = string.Join("; ", validation.Errors.Select(e => e.ErrorMessage));
+                _logger.LogError($"Request to create user location was invalid: {errors}");
+
+                return BadRequest();
+            }
 
             var userId = location.User.Id;
 

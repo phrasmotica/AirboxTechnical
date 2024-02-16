@@ -1,4 +1,7 @@
 using AirboxTechnical.Data.Services;
+using AirboxTechnical.Models;
+using AirboxTechnical.Validation;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,8 @@ builder.Services.AddSwaggerGen(options =>
 // TODO: implement services with a persistent data source, e.g. SQL database, Cosmos DB, table storage
 builder.Services.AddSingleton<IUserService, DefaultUserService>();
 builder.Services.AddSingleton<IUserLocationService, DefaultUserLocationService>();
+
+builder.Services.AddSingleton<IValidator<CreateUserLocationRequest>, CreateUserLocationRequestValidator>();
 
 var app = builder.Build();
 
