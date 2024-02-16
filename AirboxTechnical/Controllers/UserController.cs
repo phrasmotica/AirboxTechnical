@@ -37,13 +37,23 @@ namespace AirboxTechnical.Controllers
 
             _logger.LogInformation($"Creating user with name {request.Name}");
 
-            // TODO: use AutoMapper for translation of DTOs
-            var newLocation = await _userService.AddUser(new()
+            // TODO: use filter attributes for error handling
+            try
             {
-                Name = request.Name,
-            });
+                // TODO: use AutoMapper for translation of DTOs
+                var newLocation = await _userService.AddUser(new()
+                {
+                    Name = request.Name,
+                });
 
-            return Ok(newLocation);
+                return Ok(newLocation);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Failed to create user! Exception: {ex.Message}");
+
+                return StatusCode(503);
+            }
         }
     }
 }

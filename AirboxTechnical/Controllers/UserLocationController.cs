@@ -52,16 +52,26 @@ namespace AirboxTechnical.Controllers
 
             _logger.LogInformation($"Adding location for user {userId}");
 
-            // TODO: use AutoMapper for translation of DTOs
-            var newLocation = await _userLocationService.AddLocation(new()
+            // TODO: use filter attributes for error handling
+            try
             {
-                UserId = user.Id,
-                Latitude = location.Latitude,
-                Longitude = location.Longitude,
-                Timestamp = location.Timestamp,
-            });
+                // TODO: use AutoMapper for translation of DTOs
+                var newLocation = await _userLocationService.AddLocation(new()
+                {
+                    UserId = user.Id,
+                    Latitude = location.Latitude,
+                    Longitude = location.Longitude,
+                    Timestamp = location.Timestamp,
+                });
 
-            return Ok(newLocation);
+                return Ok(newLocation);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Failed to create user location! Exception: {ex.Message}");
+
+                return StatusCode(503);
+            }
         }
 
         [HttpGet("recent/{userId}", Name = "GetLastLocation")]
