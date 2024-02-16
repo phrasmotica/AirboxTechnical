@@ -1,4 +1,4 @@
-using AirboxTechnical.Services;
+using AirboxTechnical.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

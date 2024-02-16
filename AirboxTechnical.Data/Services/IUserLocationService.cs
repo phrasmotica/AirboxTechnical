@@ -1,6 +1,6 @@
-﻿using AirboxTechnical.Models;
+﻿using AirboxTechnical.Data.Models;
 
-namespace AirboxTechnical.Services
+namespace AirboxTechnical.Data.Services
 {
     public interface IUserLocationService
     {

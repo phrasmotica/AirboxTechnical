@@ -1,5 +1,5 @@
-using AirboxTechnical.Models;
-using AirboxTechnical.Services;
+using AirboxTechnical.Data.Models;
+using AirboxTechnical.Data.Services;
 using Moq;
 
 namespace AirboxTechnical.Tests

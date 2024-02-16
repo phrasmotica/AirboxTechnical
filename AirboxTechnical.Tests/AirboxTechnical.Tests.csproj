@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AirboxTechnical\AirboxTechnical.csproj" />
+    <ProjectReference Include="..\AirboxTechnical.Data\AirboxTechnical.Data.csproj" />
   </ItemGroup>
 
 </Project>

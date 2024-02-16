@@ -1,4 +1,4 @@
-namespace AirboxTechnical.Models
+namespace AirboxTechnical.Data.Models
 {
     public class UserLocation
     {
