@@ -30,6 +30,10 @@ namespace AirboxTechnical.Services
         public async Task<IEnumerable<UserLocation>> GetLastLocations()
         {
             var users = await _userService.ListUsers();
+            if (!users.Any())
+            {
+                return [];
+            }
 
             var lastLocations = users
                 .Select(u => FindLastLocation(u.Id))

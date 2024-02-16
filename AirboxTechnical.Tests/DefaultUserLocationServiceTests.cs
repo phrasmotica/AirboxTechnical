@@ -1,4 +1,6 @@
+using AirboxTechnical.Models;
 using AirboxTechnical.Services;
+using Moq;
 
 namespace AirboxTechnical.Tests
 {
@@ -8,7 +10,9 @@ namespace AirboxTechnical.Tests
         public async Task AddLocation_SuccessfullyAddsLocation()
         {
             // Arrange
-            var service = new DefaultUserLocationService();
+            var userService = new Mock<IUserService>();
+
+            var service = new DefaultUserLocationService(userService.Object);
 
             // Act
             await service.AddLocation(new()
@@ -35,7 +39,9 @@ namespace AirboxTechnical.Tests
         public async Task GetLastLocation_NoLocationForUser_ReturnsNull()
         {
             // Arrange
-            var service = new DefaultUserLocationService();
+            var userService = new Mock<IUserService>();
+
+            var service = new DefaultUserLocationService(userService.Object);
 
             // Act
             var location = await service.GetLastLocation("user1");
@@ -48,7 +54,9 @@ namespace AirboxTechnical.Tests
         public async Task GetLastLocation_ReturnsMostRecentLocation()
         {
             // Arrange
-            var service = new DefaultUserLocationService();
+            var userService = new Mock<IUserService>();
+
+            var service = new DefaultUserLocationService(userService.Object);
 
             var date = new DateTime(2024, 2, 16, 10, 58, 0);
 
@@ -89,7 +97,11 @@ namespace AirboxTechnical.Tests
         public async Task GetLastLocations_ReturnsEmptyListIfNoUsersExist()
         {
             // Arrange
-            var service = new DefaultUserLocationService();
+            var userService = new Mock<IUserService>();
+
+            userService.Setup(m => m.ListUsers()).ReturnsAsync([]);
+
+            var service = new DefaultUserLocationService(userService.Object);
 
             // Act
             var locations = (await service.GetLastLocations()).ToList();
@@ -103,7 +115,22 @@ namespace AirboxTechnical.Tests
         public async Task GetLastLocations_ReturnsMostRecentLocationsForAllUsers()
         {
             // Arrange
-            var service = new DefaultUserLocationService();
+            var userService = new Mock<IUserService>();
+
+            userService.Setup(m => m.ListUsers()).ReturnsAsync([
+                new()
+                {
+                    Id = "user1",
+                    Name = "user1",
+                },
+                new()
+                {
+                    Id = "user2",
+                    Name = "user2",
+                },
+            ]);
+
+            var service = new DefaultUserLocationService(userService.Object);
 
             var date = new DateTime(2024, 2, 16, 10, 58, 0);
 
@@ -163,7 +190,9 @@ namespace AirboxTechnical.Tests
         public async Task GetLocations_ReturnsEmptyListIfNoneExist()
         {
             // Arrange
-            var service = new DefaultUserLocationService();
+            var userService = new Mock<IUserService>();
+
+            var service = new DefaultUserLocationService(userService.Object);
 
             // Act
             var locations = (await service.GetLocations("user1")).ToList();
@@ -177,7 +206,9 @@ namespace AirboxTechnical.Tests
         public async Task GetLocations_ReturnsAllLocationsForUser()
         {
             // Arrange
-            var service = new DefaultUserLocationService();
+            var userService = new Mock<IUserService>();
+
+            var service = new DefaultUserLocationService(userService.Object);
 
             var date = new DateTime(2024, 2, 16, 10, 58, 0);
 
