@@ -43,7 +43,7 @@ namespace AirboxTechnical.Controllers
             return await _userLocationService.GetLastLocations();
         }
 
-        [HttpGet(Name = "GetLocations")]
+        [HttpGet("history/{userId}", Name = "GetLocations")]
         public async Task<IEnumerable<UserLocation>> GetLocations(string userId)
         {
             _logger.LogInformation($"Getting all locations for user {userId}");
