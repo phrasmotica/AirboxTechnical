@@ -20,41 +20,49 @@ namespace AirboxTechnical.Controllers
         }
 
         [HttpPost(Name = "AddLocation")]
-        public async Task<UserLocation> AddLocation(UserLocation location)
+        public async Task<ActionResult<UserLocation>> AddLocation(UserLocation location)
         {
             // TODO: validate UserLocation model
 
             _logger.LogInformation($"Adding location for user {location.User.Id}");
 
-            return await _userLocationService.AddLocation(location);
+            var newLocation = await _userLocationService.AddLocation(location);
+
+            return Ok(newLocation);
         }
 
         [HttpGet("recent/{userId}", Name = "GetLastLocation")]
-        public async Task<UserLocation> GetLastLocation(string userId)
+        public async Task<ActionResult<UserLocation>> GetLastLocation(string userId)
         {
-            // TODO: return 404 if user does not exist
-
             _logger.LogInformation($"Getting last location for user {userId}");
 
-            return await _userLocationService.GetLastLocation(userId);
+            var location = await _userLocationService.GetLastLocation(userId);
+            if (location is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(location);
         }
 
         [HttpGet("recent", Name = "GetLastLocations")]
-        public async Task<IEnumerable<UserLocation>> GetLastLocations()
+        public async Task<ActionResult<IEnumerable<UserLocation>>> GetLastLocations()
         {
             _logger.LogInformation("Getting last locations for all users");
 
-            return await _userLocationService.GetLastLocations();
+            var locations = await _userLocationService.GetLastLocations();
+
+            return Ok(locations);
         }
 
         [HttpGet("history/{userId}", Name = "GetLocations")]
-        public async Task<IEnumerable<UserLocation>> GetLocations(string userId)
+        public async Task<ActionResult<IEnumerable<UserLocation>>> GetLocations(string userId)
         {
-            // TODO: return 404 if user does not exist
-
             _logger.LogInformation($"Getting all locations for user {userId}");
 
-            return await _userLocationService.GetLocations(userId);
+            var locations = await _userLocationService.GetLocations(userId);
+
+            return Ok(locations);
         }
     }
 }
