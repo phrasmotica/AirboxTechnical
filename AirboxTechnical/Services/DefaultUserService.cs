@@ -17,5 +17,10 @@ namespace AirboxTechnical.Services
         {
             return Task.FromResult(_users.SingleOrDefault(u => string.Equals(u.Id, id)));
         }
+
+        public Task<List<User>> ListUsers()
+        {
+            return Task.FromResult(_users);
+        }
     }
 }

@@ -1,10 +1,17 @@
-﻿using AirboxTechnical.Models;
+using AirboxTechnical.Models;
 
 namespace AirboxTechnical.Services
 {
     public class DefaultUserLocationService : IUserLocationService
     {
         private readonly List<UserLocation> _locations = [];
+
+        private readonly IUserService _userService;
+
+        public DefaultUserLocationService(IUserService userService) 
+        {
+            _userService = userService;
+        }
 
         public Task<UserLocation> AddLocation(UserLocation location)
         {
@@ -20,11 +27,15 @@ namespace AirboxTechnical.Services
             return Task.FromResult(location);
         }
 
-        public Task<IEnumerable<UserLocation>> GetLastLocations()
+        public async Task<IEnumerable<UserLocation>> GetLastLocations()
         {
-            var lastLocations = ListUsers().Select(u => FindLastLocation(u.Id)!);
+            var users = await _userService.ListUsers();
 
-            return Task.FromResult(lastLocations);
+            var lastLocations = users
+                .Select(u => FindLastLocation(u.Id))
+                .Where(l => l is not null);
+
+            return lastLocations!;
         }
 
         public Task<IEnumerable<UserLocation>> GetLocations(string userId)
@@ -32,11 +43,6 @@ namespace AirboxTechnical.Services
             var locations = FindLocations(userId);
 
             return Task.FromResult(locations);
-        }
-
-        private IEnumerable<User> ListUsers()
-        {
-            return _locations.Select(l => l.User).DistinctBy(u => u.Id);
         }
 
         private IEnumerable<UserLocation> FindLocations(string userId)
@@ -52,8 +58,7 @@ namespace AirboxTechnical.Services
                 return null;
             }
 
-            return locations
-                .Aggregate((a, b) => a.Timestamp > b.Timestamp ? a : b);
+            return locations.Aggregate((a, b) => a.Timestamp > b.Timestamp ? a : b);
         }
     }
 }
