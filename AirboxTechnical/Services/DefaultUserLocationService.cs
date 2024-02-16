@@ -13,7 +13,7 @@ namespace AirboxTechnical.Services
             return Task.FromResult(location);
         }
 
-        public Task<UserLocation> GetLastLocation(string userId)
+        public Task<UserLocation?> GetLastLocation(string userId)
         {
             var location = FindLastLocation(userId);
 
@@ -22,7 +22,7 @@ namespace AirboxTechnical.Services
 
         public Task<IEnumerable<UserLocation>> GetLastLocations()
         {
-            var lastLocations = ListUsers().Select(u => FindLastLocation(u.Id));
+            var lastLocations = ListUsers().Select(u => FindLastLocation(u.Id)!);
 
             return Task.FromResult(lastLocations);
         }
@@ -44,9 +44,15 @@ namespace AirboxTechnical.Services
             return _locations.Where(l => string.Equals(l.User.Id, userId));
         }
 
-        private UserLocation FindLastLocation(string userId)
+        private UserLocation? FindLastLocation(string userId)
         {
-            return FindLocations(userId)
+            var locations = FindLocations(userId);
+            if (!locations.Any())
+            {
+                return null;
+            }
+
+            return locations
                 .Aggregate((a, b) => a.Timestamp > b.Timestamp ? a : b);
         }
     }

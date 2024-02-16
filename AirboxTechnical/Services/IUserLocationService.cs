@@ -6,7 +6,7 @@ namespace AirboxTechnical.Services
     {
         Task<UserLocation> AddLocation(UserLocation location);
 
-        Task<UserLocation> GetLastLocation(string userId);
+        Task<UserLocation?> GetLastLocation(string userId);
 
         Task<IEnumerable<UserLocation>> GetLastLocations();
 
