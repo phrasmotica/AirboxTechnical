@@ -22,6 +22,8 @@ namespace AirboxTechnical.Controllers
         [HttpPost(Name = "AddLocation")]
         public async Task<UserLocation> AddLocation(UserLocation location)
         {
+            // TODO: validate UserLocation model
+
             _logger.LogInformation($"Adding location for user {location.User.Id}");
 
             return await _userLocationService.AddLocation(location);
@@ -30,6 +32,8 @@ namespace AirboxTechnical.Controllers
         [HttpGet("recent/{userId}", Name = "GetLastLocation")]
         public async Task<UserLocation> GetLastLocation(string userId)
         {
+            // TODO: return 404 if user does not exist
+
             _logger.LogInformation($"Getting last location for user {userId}");
 
             return await _userLocationService.GetLastLocation(userId);
@@ -46,6 +50,8 @@ namespace AirboxTechnical.Controllers
         [HttpGet("history/{userId}", Name = "GetLocations")]
         public async Task<IEnumerable<UserLocation>> GetLocations(string userId)
         {
+            // TODO: return 404 if user does not exist
+
             _logger.LogInformation($"Getting all locations for user {userId}");
 
             return await _userLocationService.GetLocations(userId);
