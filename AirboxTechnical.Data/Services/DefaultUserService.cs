@@ -2,6 +2,9 @@
 
 namespace AirboxTechnical.Data.Services
 {
+    /// <summary>
+    /// In-memory implementation of a data service for storing user location records.
+    /// </summary>
     public class DefaultUserService : IUserService
     {
         private readonly List<User> _users = [];

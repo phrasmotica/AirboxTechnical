@@ -2,6 +2,9 @@
 
 namespace AirboxTechnical.Data.Services
 {
+    /// <summary>
+    /// In-memory implementation of a data service for storing user location records.
+    /// </summary>
     public class DefaultUserLocationService : IUserLocationService
     {
         private readonly List<UserLocation> _locations = [];
@@ -20,6 +23,9 @@ namespace AirboxTechnical.Data.Services
             {
                 throw new InvalidOperationException($"User {location.User.Id} does not exist!");
             }
+
+            // TODO: prevent a new location with the same timestamp as an existing location
+            // for the given user from being added
 
             _locations.Add(location);
 
