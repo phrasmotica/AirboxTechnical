@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirboxTechnical", "AirboxTechnical\AirboxTechnical.csproj", "{B9260FFA-0418-47FA-93B4-0672080EDBC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirboxTechnical.Tests", "AirboxTechnical.Tests\AirboxTechnical.Tests.csproj", "{4B52ED0D-015D-476C-9A9A-9697FCFB61F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirboxTechnical.Data.Tests", "AirboxTechnical.Tests\AirboxTechnical.Data.Tests.csproj", "{4B52ED0D-015D-476C-9A9A-9697FCFB61F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirboxTechnical.Data", "AirboxTechnical.Data\AirboxTechnical.Data.csproj", "{12B250FC-AAF8-4877-9D54-B9A3CF746BC5}"
 EndProject

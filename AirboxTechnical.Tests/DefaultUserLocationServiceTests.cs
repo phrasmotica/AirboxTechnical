@@ -2,7 +2,7 @@ using AirboxTechnical.Data.Models;
 using AirboxTechnical.Data.Services;
 using Moq;
 
-namespace AirboxTechnical.Tests
+namespace AirboxTechnical.Data.Tests
 {
     public class DefaultUserLocationServiceTests
     {

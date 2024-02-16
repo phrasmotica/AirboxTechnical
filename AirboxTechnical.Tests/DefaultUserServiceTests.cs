@@ -1,6 +1,6 @@
 using AirboxTechnical.Data.Services;
 
-namespace AirboxTechnical.Tests
+namespace AirboxTechnical.Data.Tests
 {
     public class DefaultUserServiceTests
     {
