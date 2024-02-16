@@ -27,19 +27,22 @@ namespace AirboxTechnical.Controllers
         {
             // TODO: validate UserLocation model
 
-            var user = await _userService.GetUser(location.User.Id);
+            var userId = location.User.Id;
+
+            var user = await _userService.GetUser(userId);
             if (user is null)
             {
-                _logger.LogError($"Creating user {location.User.Id}");
+                _logger.LogError($"Creating user with name {location.User.Name}");
 
-                await _userService.AddUser(new()
+                var newUser = await _userService.AddUser(new()
                 {
-                    Id = location.User.Id,
                     Name = location.User.Name,
                 });
+
+                location.User = newUser;
             }
 
-            _logger.LogInformation($"Adding location for user {location.User.Id}");
+            _logger.LogInformation($"Adding location for user {userId}");
 
             var newLocation = await _userLocationService.AddLocation(location);
 

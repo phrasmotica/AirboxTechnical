@@ -18,7 +18,7 @@ namespace AirboxTechnical.Data.Services
             var user = await _userService.GetUser(location.User.Id);
             if (user is null)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException($"User {location.User.Id} does not exist!");
             }
 
             _locations.Add(location);
