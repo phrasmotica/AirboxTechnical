@@ -25,7 +25,7 @@ namespace AirboxTechnical.Tests
 
             var validation = validator.Validate(new Models.CreateUserLocationRequest()
             {
-                User = new(),
+                UserId = "userId",
                 Latitude = 200,
                 Longitude = -5,
             });
@@ -40,7 +40,7 @@ namespace AirboxTechnical.Tests
 
             var validation = validator.Validate(new Models.CreateUserLocationRequest()
             {
-                User = new(),
+                UserId = "userId",
                 Latitude = 5,
                 Longitude = -200,
             });

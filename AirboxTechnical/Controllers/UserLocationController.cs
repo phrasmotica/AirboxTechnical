@@ -39,7 +39,7 @@ namespace AirboxTechnical.Controllers
                 return BadRequest();
             }
 
-            var userId = location.User.Id;
+            var userId = location.UserId;
 
             var user = await _userService.GetUser(userId);
             if (user is null)
@@ -57,8 +57,8 @@ namespace AirboxTechnical.Controllers
             {
                 User = new()
                 {
-                    Id = location.User.Id,
-                    Name = location.User.Name,
+                    Id = user.Id,
+                    Name = user.Name,
                 },
                 Latitude = location.Latitude,
                 Longitude = location.Longitude,

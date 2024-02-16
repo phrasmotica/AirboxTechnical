@@ -4,7 +4,7 @@ namespace AirboxTechnical.Models
 {
     public class CreateUserLocationRequest
     {
-        public User User { get; set; } = default!;
+        public string UserId { get; set; } = default!;
 
         public DateTime Timestamp { get; set; }
 

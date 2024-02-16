@@ -5,27 +5,27 @@
     "version": "1.0"
   },
   "paths": {
-    "/UserLocation": {
+    "/User": {
       "post": {
         "tags": [
-          "UserLocation"
+          "User"
         ],
-        "operationId": "AddLocation",
+        "operationId": "CreateUser",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLocation"
+                "$ref": "#/components/schemas/AirboxTechnical.Models.CreateUserRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLocation"
+                "$ref": "#/components/schemas/AirboxTechnical.Models.CreateUserRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLocation"
+                "$ref": "#/components/schemas/AirboxTechnical.Models.CreateUserRequest"
               }
             }
           }
@@ -36,17 +36,66 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLocation"
+                  "$ref": "#/components/schemas/AirboxTechnical.Models.User"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLocation"
+                  "$ref": "#/components/schemas/AirboxTechnical.Models.User"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLocation"
+                  "$ref": "#/components/schemas/AirboxTechnical.Models.User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UserLocation": {
+      "post": {
+        "tags": [
+          "UserLocation"
+        ],
+        "operationId": "AddLocation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AirboxTechnical.Models.CreateUserLocationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AirboxTechnical.Models.CreateUserLocationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AirboxTechnical.Models.CreateUserLocationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                 }
               }
             }
@@ -76,17 +125,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLocation"
+                  "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLocation"
+                  "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLocation"
+                  "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                 }
               }
             }
@@ -108,7 +157,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserLocation"
+                    "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                   }
                 }
               },
@@ -116,7 +165,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserLocation"
+                    "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                   }
                 }
               },
@@ -124,7 +173,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserLocation"
+                    "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                   }
                 }
               }
@@ -157,7 +206,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserLocation"
+                    "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                   }
                 }
               },
@@ -165,7 +214,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserLocation"
+                    "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                   }
                 }
               },
@@ -173,7 +222,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserLocation"
+                    "$ref": "#/components/schemas/AirboxTechnical.Data.Models.UserLocation"
                   }
                 }
               }
@@ -185,7 +234,7 @@
   },
   "components": {
     "schemas": {
-      "User": {
+      "AirboxTechnical.Data.Models.User": {
         "type": "object",
         "properties": {
           "id": {
@@ -199,11 +248,11 @@
         },
         "additionalProperties": false
       },
-      "UserLocation": {
+      "AirboxTechnical.Data.Models.UserLocation": {
         "type": "object",
         "properties": {
           "user": {
-            "$ref": "#/components/schemas/User"
+            "$ref": "#/components/schemas/AirboxTechnical.Data.Models.User"
           },
           "timestamp": {
             "type": "string",
@@ -216,6 +265,52 @@
           "longitude": {
             "type": "number",
             "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AirboxTechnical.Models.CreateUserLocationRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AirboxTechnical.Models.CreateUserRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AirboxTechnical.Models.User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

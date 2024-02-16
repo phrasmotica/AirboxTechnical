@@ -7,7 +7,7 @@ namespace AirboxTechnical.Validation
     {
         public CreateUserLocationRequestValidator()
         {
-            RuleFor(r => r.User).NotNull();
+            RuleFor(r => r.UserId).NotEmpty().WithMessage("The user ID must not be empty");
 
             RuleFor(r => r.Latitude).GreaterThan(-90).WithMessage("Latitude value must be greater than -90");
             RuleFor(r => r.Latitude).LessThan(90).WithMessage("Latitude value must be less than 90");
