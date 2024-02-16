@@ -8,6 +8,8 @@ namespace AirboxTechnical.Services
 
         public Task<User> AddUser(User user)
         {
+            user.Id = Guid.NewGuid().ToString();
+
             _users.Add(user);
 
             return Task.FromResult(user);
