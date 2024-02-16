@@ -9,7 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// TODO: implement user location service with a persistent data source, e.g. SQL database, Cosmos DB, table storage
+// TODO: implement services with a persistent data source, e.g. SQL database, Cosmos DB, table storage
+builder.Services.AddSingleton<IUserService, DefaultUserService>();
 builder.Services.AddSingleton<IUserLocationService, DefaultUserLocationService>();
 
 var app = builder.Build();
