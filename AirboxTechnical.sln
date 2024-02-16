@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirboxTechnical", "AirboxTechnical\AirboxTechnical.csproj", "{B9260FFA-0418-47FA-93B4-0672080EDBC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9260FFA-0418-47FA-93B4-0672080EDBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9260FFA-0418-47FA-93B4-0672080EDBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9260FFA-0418-47FA-93B4-0672080EDBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9260FFA-0418-47FA-93B4-0672080EDBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83F2279C-4F0C-4F94-9C7F-F2D157AC0DB6}
+	EndGlobalSection
+EndGlobal
