@@ -12,6 +12,8 @@ namespace AirboxTechnical.Tests
             // Arrange
             var userService = new Mock<IUserService>();
 
+            userService.Setup(m => m.GetUser(It.IsAny<string>())).ReturnsAsync(new User());
+
             var service = new DefaultUserLocationService(userService.Object);
 
             // Act
@@ -55,6 +57,8 @@ namespace AirboxTechnical.Tests
         {
             // Arrange
             var userService = new Mock<IUserService>();
+
+            userService.Setup(m => m.GetUser(It.IsAny<string>())).ReturnsAsync(new User());
 
             var service = new DefaultUserLocationService(userService.Object);
 
@@ -116,6 +120,8 @@ namespace AirboxTechnical.Tests
         {
             // Arrange
             var userService = new Mock<IUserService>();
+
+            userService.Setup(m => m.GetUser(It.IsAny<string>())).ReturnsAsync(new User());
 
             userService.Setup(m => m.ListUsers()).ReturnsAsync([
                 new()
@@ -207,6 +213,8 @@ namespace AirboxTechnical.Tests
         {
             // Arrange
             var userService = new Mock<IUserService>();
+
+            userService.Setup(m => m.GetUser(It.IsAny<string>())).ReturnsAsync(new User());
 
             var service = new DefaultUserLocationService(userService.Object);
 

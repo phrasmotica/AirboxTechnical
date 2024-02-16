@@ -1,4 +1,4 @@
-using AirboxTechnical.Models;
+﻿using AirboxTechnical.Models;
 
 namespace AirboxTechnical.Services
 {
@@ -13,18 +13,28 @@ namespace AirboxTechnical.Services
             _userService = userService;
         }
 
-        public Task<UserLocation> AddLocation(UserLocation location)
+        public async Task<UserLocation> AddLocation(UserLocation location)
         {
+            var user = await _userService.GetUser(location.User.Id);
+            if (user is null)
+            {
+                throw new InvalidOperationException();
+            }
+
             _locations.Add(location);
 
-            return Task.FromResult(location);
+            return location;
         }
 
-        public Task<UserLocation?> GetLastLocation(string userId)
+        public async Task<UserLocation?> GetLastLocation(string userId)
         {
-            var location = FindLastLocation(userId);
+            var user = await _userService.GetUser(userId);
+            if (user is null)
+            {
+                return null;
+            }
 
-            return Task.FromResult(location);
+            return FindLastLocation(userId);
         }
 
         public async Task<IEnumerable<UserLocation>> GetLastLocations()
