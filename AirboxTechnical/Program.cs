@@ -20,6 +20,7 @@ builder.Services.AddSingleton<IUserService, DefaultUserService>();
 builder.Services.AddSingleton<IUserLocationService, DefaultUserLocationService>();
 
 builder.Services.AddSingleton<IValidator<CreateUserLocationRequest>, CreateUserLocationRequestValidator>();
+builder.Services.AddSingleton<IValidator<CreateUserRequest>, CreateUserRequestValidator>();
 
 var app = builder.Build();
 
