@@ -55,11 +55,7 @@ namespace AirboxTechnical.Controllers
             // TODO: use AutoMapper for translation of DTOs
             var newLocation = await _userLocationService.AddLocation(new()
             {
-                User = new()
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                },
+                UserId = user.Id,
                 Latitude = location.Latitude,
                 Longitude = location.Longitude,
                 Timestamp = location.Timestamp,

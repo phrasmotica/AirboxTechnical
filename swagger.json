@@ -234,25 +234,16 @@
   },
   "components": {
     "schemas": {
-      "AirboxTechnical.Data.Models.User": {
+      "AirboxTechnical.Data.Models.UserLocation": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
             "nullable": true
           },
-          "name": {
+          "userId": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "AirboxTechnical.Data.Models.UserLocation": {
-        "type": "object",
-        "properties": {
-          "user": {
-            "$ref": "#/components/schemas/AirboxTechnical.Data.Models.User"
           },
           "timestamp": {
             "type": "string",

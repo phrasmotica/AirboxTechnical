@@ -22,11 +22,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 1,
                 Longitude = 1,
                 Timestamp = DateTime.Now,
-                User = new()
-                {
-                    Id = "user1",
-                    Name = "user1",
-                },
+                UserId = "user1",
             });
 
             // Assert
@@ -70,11 +66,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 10,
                 Longitude = 10,
                 Timestamp = date,
-                User = new()
-                {
-                    Id = "user1",
-                    Name = "user1",
-                },
+                UserId = "user1",
             });
 
             await service.AddLocation(new()
@@ -82,11 +74,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 20,
                 Longitude = 20,
                 Timestamp = date.AddHours(1),
-                User = new()
-                {
-                    Id = "user1",
-                    Name = "user1",
-                },
+                UserId = "user1",
             });
 
             var location = await service.GetLastLocation("user1");
@@ -146,11 +134,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 10,
                 Longitude = 10,
                 Timestamp = date,
-                User = new()
-                {
-                    Id = "user1",
-                    Name = "user1",
-                },
+                UserId = "user1",
             });
 
             await service.AddLocation(new()
@@ -158,11 +142,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 20,
                 Longitude = 20,
                 Timestamp = date.AddHours(1),
-                User = new()
-                {
-                    Id = "user1",
-                    Name = "user1",
-                },
+                UserId = "user1",
             });
 
             await service.AddLocation(new()
@@ -170,11 +150,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 30,
                 Longitude = 30,
                 Timestamp = date,
-                User = new()
-                {
-                    Id = "user2",
-                    Name = "user2",
-                },
+                UserId = "user2",
             });
 
             var locations = (await service.GetLastLocations()).ToList();
@@ -183,11 +159,11 @@ namespace AirboxTechnical.Data.Tests
             Assert.That(locations, Is.Not.Null);
             Assert.That(locations, Has.Count.EqualTo(2));
 
-            Assert.That(locations[0].User.Id, Is.EqualTo("user1"));
+            Assert.That(locations[0].UserId, Is.EqualTo("user1"));
             Assert.That(locations[0].Latitude, Is.EqualTo(20));
             Assert.That(locations[0].Longitude, Is.EqualTo(20));
 
-            Assert.That(locations[1].User.Id, Is.EqualTo("user2"));
+            Assert.That(locations[1].UserId, Is.EqualTo("user2"));
             Assert.That(locations[1].Latitude, Is.EqualTo(30));
             Assert.That(locations[1].Longitude, Is.EqualTo(30));
         }
@@ -226,11 +202,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 10,
                 Longitude = 10,
                 Timestamp = date,
-                User = new()
-                {
-                    Id = "user1",
-                    Name = "user1",
-                },
+                UserId = "user1",
             });
 
             await service.AddLocation(new()
@@ -238,11 +210,7 @@ namespace AirboxTechnical.Data.Tests
                 Latitude = 20,
                 Longitude = 20,
                 Timestamp = date.AddHours(1),
-                User = new()
-                {
-                    Id = "user1",
-                    Name = "user1",
-                },
+                UserId = "user1",
             });
 
             var locations = (await service.GetLocations("user1")).ToList();

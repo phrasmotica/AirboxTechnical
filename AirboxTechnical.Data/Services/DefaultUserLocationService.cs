@@ -18,11 +18,13 @@ namespace AirboxTechnical.Data.Services
 
         public async Task<UserLocation> AddLocation(UserLocation location)
         {
-            var user = await _userService.GetUser(location.User.Id);
+            var user = await _userService.GetUser(location.UserId);
             if (user is null)
             {
-                throw new InvalidOperationException($"User {location.User.Id} does not exist!");
+                throw new InvalidOperationException($"User {location.UserId} does not exist!");
             }
+
+            location.Id = Guid.NewGuid().ToString();
 
             // TODO: prevent a new location with the same timestamp as an existing location
             // for the given user from being added
@@ -67,7 +69,7 @@ namespace AirboxTechnical.Data.Services
 
         private IEnumerable<UserLocation> FindLocations(string userId)
         {
-            return _locations.Where(l => string.Equals(l.User.Id, userId));
+            return _locations.Where(l => string.Equals(l.UserId, userId));
         }
 
         private UserLocation? FindLastLocation(string userId)

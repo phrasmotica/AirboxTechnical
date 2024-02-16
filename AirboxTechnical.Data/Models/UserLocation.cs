@@ -2,9 +2,9 @@ namespace AirboxTechnical.Data.Models
 {
     public class UserLocation
     {
-        // TODO: add GUID field
+        public string Id { get; set; } = default!;
 
-        public User User { get; set; } = default!;
+        public string UserId { get; set; } = default!;
 
         public DateTime Timestamp { get; set; }
 
