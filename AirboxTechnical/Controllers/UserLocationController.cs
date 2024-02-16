@@ -1,5 +1,6 @@
 using AirboxTechnical.Data.Models;
 using AirboxTechnical.Data.Services;
+using AirboxTechnical.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirboxTechnical.Controllers
@@ -23,9 +24,9 @@ namespace AirboxTechnical.Controllers
         }
 
         [HttpPost(Name = "AddLocation")]
-        public async Task<ActionResult<UserLocation>> AddLocation(UserLocation location)
+        public async Task<ActionResult<UserLocation>> AddLocation(CreateUserLocationRequest location)
         {
-            // TODO: validate UserLocation model
+            // TODO: validate CreateUserLocationRequest model
 
             var userId = location.User.Id;
 
@@ -39,12 +40,23 @@ namespace AirboxTechnical.Controllers
                     Name = location.User.Name,
                 });
 
-                location.User = newUser;
+                location.User.Id = newUser.Id;
             }
 
             _logger.LogInformation($"Adding location for user {userId}");
 
-            var newLocation = await _userLocationService.AddLocation(location);
+            // TODO: use AutoMapper for translation of DTOs
+            var newLocation = await _userLocationService.AddLocation(new()
+            {
+                User = new()
+                {
+                    Id = location.User.Id,
+                    Name = location.User.Name,
+                },
+                Latitude = location.Latitude,
+                Longitude = location.Longitude,
+                Timestamp = location.Timestamp,
+            });
 
             return Ok(newLocation);
         }
