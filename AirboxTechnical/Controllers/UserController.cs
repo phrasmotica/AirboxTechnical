@@ -13,6 +13,8 @@ namespace AirboxTechnical.Controllers
         private readonly IValidator<CreateUserRequest> _createRequestValidator;
         private readonly ILogger<UserController> _logger;
 
+        // TODO: implement Polly resilience policy, for wrapping calls to data services
+
         public UserController(
             IUserService userService,
             IValidator<CreateUserRequest> createRequestValidator,
@@ -41,12 +43,14 @@ namespace AirboxTechnical.Controllers
             try
             {
                 // TODO: use AutoMapper for translation of DTOs
-                var newLocation = await _userService.AddUser(new()
+                var newUser = await _userService.AddUser(new()
                 {
                     Name = request.Name,
                 });
 
-                return Ok(newLocation);
+                // TODO: raise an event indicating that a user has been created
+
+                return Ok(newUser);
             }
             catch (Exception ex)
             {

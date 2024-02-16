@@ -15,6 +15,8 @@ namespace AirboxTechnical.Controllers
         private readonly IValidator<CreateUserLocationRequest> _createRequestValidator;
         private readonly ILogger<UserLocationController> _logger;
 
+        // TODO: implement Polly resilience policy, for wrapping calls to data services
+
         public UserLocationController(
             IUserService userService,
             IUserLocationService userLocationService,
@@ -28,9 +30,9 @@ namespace AirboxTechnical.Controllers
         }
 
         [HttpPost(Name = "AddLocation")]
-        public async Task<ActionResult<UserLocation>> AddLocation(CreateUserLocationRequest location)
+        public async Task<ActionResult<UserLocation>> AddLocation(CreateUserLocationRequest request)
         {
-            var validation = _createRequestValidator.Validate(location);
+            var validation = _createRequestValidator.Validate(request);
             if (!validation.IsValid)
             {
                 var errors = string.Join("; ", validation.Errors.Select(e => e.ErrorMessage));
@@ -39,7 +41,7 @@ namespace AirboxTechnical.Controllers
                 return BadRequest();
             }
 
-            var userId = location.UserId;
+            var userId = request.UserId;
 
             var user = await _userService.GetUser(userId);
             if (user is null)
@@ -59,10 +61,12 @@ namespace AirboxTechnical.Controllers
                 var newLocation = await _userLocationService.AddLocation(new()
                 {
                     UserId = user.Id,
-                    Latitude = location.Latitude,
-                    Longitude = location.Longitude,
-                    Timestamp = location.Timestamp,
+                    Latitude = request.Latitude,
+                    Longitude = request.Longitude,
+                    Timestamp = request.Timestamp,
                 });
+
+                // TODO: raise an event indicating that a user location has been created
 
                 return Ok(newLocation);
             }

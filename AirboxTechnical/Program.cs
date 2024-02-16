@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddSingleton<IUserService, DefaultUserService>();
 builder.Services.AddSingleton<IUserLocationService, DefaultUserLocationService>();
 
+// TODO: instantiate these inside a dictionary/registry to prevent proliferation of constructor parameters
 builder.Services.AddSingleton<IValidator<CreateUserLocationRequest>, CreateUserLocationRequestValidator>();
 builder.Services.AddSingleton<IValidator<CreateUserRequest>, CreateUserRequestValidator>();
 
